@@ -57,6 +57,21 @@ File downloaded successfully! Written to actualbudget_backup_2024-01-01_12-48-03
 
 The backup will be downloaded and written to a file in the current working directory with a datetime suffix.
 
+## Usage - Docker
+
+Docker images are available at https://hub.docker.com/r/ccolic/actualbudget-backup
+
+To use the image, run the image and pass the needed parameters as environment variables. Also make sure to mount some directory at /app, where the file will be downloaded.
+
+```
+docker run \ 
+  -e PASSWORD=secret \ 
+  -e SERVER_URL=https://budget.example.com \ 
+  -e BUDGET_SYNC_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \ 
+  -v $(pwd):/app \ 
+  ccolic/actualbudget-backup
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
