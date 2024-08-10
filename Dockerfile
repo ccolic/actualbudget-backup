@@ -1,4 +1,4 @@
-FROM lukemathwalker/cargo-chef:latest-rust-alpine as chef
+FROM lukemathwalker/cargo-chef:latest-rust-alpine AS chef
 LABEL org.opencontainers.image.source=https://github.com/ccolic/actualbudget-backup
 WORKDIR /app
 
@@ -14,7 +14,7 @@ COPY . .
 RUN cargo build --release
 RUN mv ./target/release/actualbudget-backup ./actualbudget-backup
 
-FROM scratch AS runtime
+FROM alpine AS runtime
 WORKDIR /app
 COPY --from=builder /app/actualbudget-backup /usr/local/bin/
 ENTRYPOINT ["/usr/local/bin/actualbudget-backup"]
