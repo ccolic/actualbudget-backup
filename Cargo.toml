@@ -1,0 +1,21 @@
+[package]
+name = "actualbudget-backup"
+version = "1.0.0"
+authors = ["Christian Colic <christian@colic.io>"]
+edition = "2021"
+description = "CLI Tool to download a backup from your Actual Budget instance, written in Rust"
+documentation = "https://github.com/ccolic/actualbudget-backup"
+readme = "README.md"
+homepage = "https://github.com/ccolic/actualbudget-backup"
+repository = "https://github.com/ccolic/actualbudget-backup"
+license-file = "LICENSE"
+publish = false
+
+[dependencies]
+chrono = "0.4.38"
+clap = { version = "4.5.14", features = ["derive", "env"] }
+reqwest = { version = "0.12.5", features = ["blocking", "json"] }
+serde_json = "1.0.122"
+
+[profile.release]
+lto = true
