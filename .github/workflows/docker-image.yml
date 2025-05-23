@@ -3,7 +3,7 @@ name: Docker Image CI
 on:
   push:
     tags:
-      - '[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   build-and-publish:
@@ -24,7 +24,7 @@ jobs:
     
     - name: Extract tag name
       id: extract_tag
-      run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      run: echo "tag=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
     
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
