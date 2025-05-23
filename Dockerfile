@@ -1,5 +1,6 @@
-FROM lukemathwalker/cargo-chef:latest-rust-alpine AS chef
+FROM rust:1 AS chef
 LABEL org.opencontainers.image.source=https://github.com/ccolic/actualbudget-backup
+RUN cargo install cargo-chef
 WORKDIR /app
 
 FROM chef AS planner
@@ -12,9 +13,8 @@ COPY --from=planner /app/recipe.json .
 RUN cargo chef cook --release
 COPY . .
 RUN cargo build --release
-RUN mv ./target/release/actualbudget-backup ./actualbudget-backup
 
-FROM alpine AS runtime
+FROM debian:12 AS runtime
 WORKDIR /app
-COPY --from=builder /app/actualbudget-backup /usr/local/bin/
+COPY --from=builder /app/target/release/actualbudget-backup /usr/local/bin/
 ENTRYPOINT ["/usr/local/bin/actualbudget-backup"]

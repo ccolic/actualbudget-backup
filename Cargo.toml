@@ -9,7 +9,6 @@ readme = "README.md"
 homepage = "https://github.com/ccolic/actualbudget-backup"
 repository = "https://github.com/ccolic/actualbudget-backup"
 license-file = "LICENSE"
-publish = false
 
 [dependencies]
 chrono = { version = "0.4", features = ["serde"] }
@@ -24,3 +23,6 @@ debug = false    # Exclude debug symbols for smaller binary size
 lto = true       # Link-Time Optimization for further size reduction
 opt-level = 3    # Maximum optimization for performance
 panic = "abort"  # Use `abort` to reduce binary size further
+
+[target.'cfg(target_env = "musl")'.dependencies]
+openssl = { version = "*", features = ["vendored"] }
