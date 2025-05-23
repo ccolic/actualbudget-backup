@@ -3,7 +3,7 @@ LABEL org.opencontainers.image.source=https://github.com/ccolic/actualbudget-bac
 WORKDIR /app
 
 FROM chef AS planner
-COPY ./Cargo.toml ./Cargo.lock ./
+COPY ./Cargo.toml ./
 COPY ./src ./src
 RUN cargo chef prepare
 
