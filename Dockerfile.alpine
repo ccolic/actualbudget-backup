@@ -19,4 +19,5 @@ FROM alpine AS runtime
 RUN addgroup -S backup && adduser -S backup -G backup
 COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/actualbudget-backup /usr/local/bin/
 USER backup
+WORKDIR /app
 CMD ["/usr/local/bin/actualbudget-backup"]
