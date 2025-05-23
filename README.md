@@ -59,7 +59,7 @@ The backup will be downloaded and written to a file in the current working direc
 
 ## Usage - Docker
 
-Docker images are available at https://hub.docker.com/r/ccolic/actualbudget-backup
+Docker images are available at [https://hub.docker.com/r/ccolic/actualbudget-backup](https://github.com/ccolic/actualbudget-backup/pkgs/container/actualbudget-backup)
 
 To use the image, run the image and pass the needed parameters as environment variables. Also make sure to mount some directory at /app, where the file will be downloaded.
 
@@ -69,7 +69,7 @@ docker run \
   -e SERVER_URL=https://budget.example.com \ 
   -e BUDGET_SYNC_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \ 
   -v $(pwd):/app \ 
-  ccolic/actualbudget-backup
+  ghcr.io/ccolic/actualbudget-backup
 ```
 
 ## Contributing
