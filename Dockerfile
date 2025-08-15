@@ -14,7 +14,7 @@ RUN cargo chef cook --release
 COPY . .
 RUN cargo build --release
 
-FROM debian:12 AS runtime
+FROM debian:13 AS runtime
 WORKDIR /app
 COPY --from=builder /app/target/release/actualbudget-backup /usr/local/bin/
 ENTRYPOINT ["/usr/local/bin/actualbudget-backup"]
