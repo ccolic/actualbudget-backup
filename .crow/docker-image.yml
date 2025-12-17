@@ -1,0 +1,35 @@
+when:
+  - event: tag
+    tag: v[0-9]+.[0-9]+.[0-9]+
+
+steps:
+  - name: build-and-publish
+    image: codeberg.org/crow-plugins/docker-buildx:2
+    privileged: false
+    settings:
+      repo: ghcr.io/${CI_REPO}
+      registry: ghcr.io
+      username: ${CI_REPO_OWNER}
+      password:
+        from_secret: CROW_SECRETS_GHCR_TOKEN
+      dockerfile: Dockerfile
+      platforms: linux/amd64,linux/arm64
+      tags:
+        - ${CI_COMMIT_TAG##v}
+        - latest
+      auto_tag: false
+
+  - name: build-and-publish-alpine
+    image: codeberg.org/crow-plugins/docker-buildx:2
+    privileged: false
+    settings:
+      repo: ghcr.io/${CI_REPO}
+      registry: ghcr.io
+      username: ${CI_REPO_OWNER}
+      password:
+        from_secret: CROW_SECRETS_GHCR_TOKEN
+      dockerfile: Dockerfile.alpine
+      platforms: linux/amd64
+      tags:
+        - ${CI_COMMIT_TAG##v}-alpine
+      auto_tag: false
